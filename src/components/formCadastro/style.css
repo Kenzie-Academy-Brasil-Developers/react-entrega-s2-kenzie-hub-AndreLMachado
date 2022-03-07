@@ -1,0 +1,140 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h4 {
+  margin: 0;
+}
+
+.erros {
+  font-size: 10px;
+  color: red;
+}
+
+.div-err {
+  display: flex;
+  width: 268px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.voltar {
+  background-color: #212529;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 16.2426px;
+  width: 79.54px;
+  height: 25.58px;
+  left: 228.46px;
+  top: 49.46px;
+  background: #212529;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.cadastrar {
+  background-color: #59323f;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 16.2426px;
+  border: 1.2182px solid #59323f;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 264.66px;
+  margin: 0 auto;
+}
+
+.select-mod {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12.182px;
+  line-height: 0px;
+  color: #f8f9fa;
+  width: 264px;
+  display: flex;
+  height: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.input-form-cad {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 16.2426px;
+
+  border: 1.2182px solid #343b41;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  background: #343b41;
+
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 329px;
+}
+
+select {
+  height: 38px;
+  padding: 0px 16.2426px;
+  border: 1.2182px solid #343b41;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background: #343b41;
+  color: #fff;
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+}
+
+.formulario {
+  height: 568.47px;
+  background: #212529;
+  padding: 33.5803px 17.5897px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.span-form {
+  display: flex;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12.182px;
+  line-height: 0px;
+  color: #f8f9fa;
+}
+
+.rapido {
+  width: 264px;
+  height: 22px;
+  left: 102px;
+  top: 92px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 22px;
+  color: #868e96;
+}
+
+@media (min-width: 550px) {
+  .formulario {
+    height: 650px;
+  }
+}
