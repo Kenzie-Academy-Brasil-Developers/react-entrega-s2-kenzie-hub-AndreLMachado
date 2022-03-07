@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import "./style.css";
 
 const Home = () => {
   const history = useHistory();
@@ -48,6 +51,15 @@ const Home = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver({}),
+  });
+
   console.log(user);
   return (
     <div>
@@ -58,21 +70,30 @@ const Home = () => {
         </button>
       </header>
 
+      <p className="comprimento">Olá, {user.name}</p>
+      <p>{user.course_module}</p>
+
       <div className="newTec">
-        <input placeholder="Tecnologia"></input>
-        <select>
+        <input
+          placeholder="Tecnologia"
+          {...register("tecnologia")}
+          onChange={(e) => setUser({ ...user, tecnologia: e.target.value })}
+        />
+        <select
+          {...register("status")}
+          onChange={(e) => setUser({ ...user, status: e.target.value })}
+        >
           <option>Selecione</option>
-          <option>Iniciante</option>
-          <option>Intermediário</option>
-          <option>Avançado</option>
+          <option value="Iniciante">Iniciante</option>
+          <option value="Intermediário">Intermediário</option>
+          <option value="Terceiro Módulo">Terceiro Módulo</option>
+          <option value="Avançado">Avançado</option>
         </select>
+
         <button onClick={saveTech} className="salvarCard">
           Salvar
         </button>
       </div>
-
-      <p className="comprimento">Olá, {user.name}</p>
-      <p>{user.course_module}</p>
       <p>Tecnologias:</p>
       {(user.techs || []).map((tech) => (
         <p>
