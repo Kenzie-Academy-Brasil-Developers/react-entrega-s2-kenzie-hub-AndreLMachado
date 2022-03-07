@@ -23,10 +23,9 @@ const Home = () => {
   };
 
   const saveTech = () => {
-    //////
     const mock = {
-      title: "Hardware",
-      status: "Intermediário",
+      title: user.title,
+      status: user.status,
     };
 
     fetch("https://kenziehub.herokuapp.com/users/techs", {
@@ -52,6 +51,10 @@ const Home = () => {
       .catch((err) => console.log(err));
   };
 
+  const onSubmitFunction = (data) => {
+    console.log(data);
+  };
+
   const {
     register,
     handleSubmit,
@@ -74,25 +77,29 @@ const Home = () => {
       <p>{user.course_module}</p>
 
       <div className="newTec">
-        <input
-          placeholder="Tecnologia"
-          {...register("tecnologia")}
-          onChange={(e) => setUser({ ...user, tecnologia: e.target.value })}
-        />
-        <select
-          {...register("status")}
-          onChange={(e) => setUser({ ...user, status: e.target.value })}
-        >
-          <option>Selecione</option>
-          <option value="Iniciante">Iniciante</option>
-          <option value="Intermediário">Intermediário</option>
-          <option value="Terceiro Módulo">Terceiro Módulo</option>
-          <option value="Avançado">Avançado</option>
-        </select>
+        <form className="form-home" onSubmit={handleSubmit(onSubmitFunction)}>
+          <input
+            className="inp-new-tec"
+            placeholder="Tecnologia"
+            {...register("title")}
+            onChange={(e) => setUser({ ...user, title: e.target.value })}
+          />
+          <select
+            className="select-home"
+            {...register("status")}
+            onChange={(e) => setUser({ ...user, status: e.target.value })}
+          >
+            <option>Selecione</option>
+            <option value="Iniciante">Iniciante</option>
+            <option value="Intermediário">Intermediário</option>
+            <option value="Terceiro Módulo">Terceiro Módulo</option>
+            <option value="Avançado">Avançado</option>
+          </select>
 
-        <button onClick={saveTech} className="salvarCard">
-          Salvar
-        </button>
+          <button onClick={saveTech} className="salvarCard">
+            Salvar
+          </button>
+        </form>
       </div>
       <p>Tecnologias:</p>
       {(user.techs || []).map((tech) => (

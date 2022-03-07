@@ -53,8 +53,6 @@ const Form = ({ usuario, setUsuario }) => {
           //
         }
 
-        localStorage.setItem("user", JSON.stringify(response.user));
-        localStorage.setItem("token", response.token);
         history.push(`/`);
       })
       .catch((err) => console.log(err));

@@ -19,3 +19,21 @@
   align-items: center;
   padding: 10px;
 }
+
+.form-home {
+  display: flex;
+  flex-direction: column;
+  max-width: 95vw;
+}
+
+.select-home {
+  width: 268px;
+}
+
+.salvarCard {
+  margin-top: 20px;
+  border-radius: 8px;
+  background-color: #212529;
+  color: #fff;
+  border: none;
+}
