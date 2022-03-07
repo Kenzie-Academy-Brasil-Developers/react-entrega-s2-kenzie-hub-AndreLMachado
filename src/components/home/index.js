@@ -14,6 +14,7 @@ const Home = () => {
     }
 
     setUser(JSON.parse(localStorage.getItem("user")));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const doLogout = () => {
@@ -55,11 +56,7 @@ const Home = () => {
     console.log(data);
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver({}),
   });
 

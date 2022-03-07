@@ -1,7 +1,6 @@
 import "./style.css";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
@@ -48,11 +47,7 @@ const Login = ({ usuario, setUsuario }) => {
       .catch((err) => console.log(err));
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register } = useForm({
     resolver: yupResolver({}),
   });
 

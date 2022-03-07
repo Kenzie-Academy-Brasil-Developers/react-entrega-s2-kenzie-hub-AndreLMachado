@@ -49,7 +49,6 @@ const Form = ({ usuario, setUsuario }) => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response.status);
         if (response.status !== "error") {
           toast.success("Cadastro criado com sucesso");
           history.push(`/`);
