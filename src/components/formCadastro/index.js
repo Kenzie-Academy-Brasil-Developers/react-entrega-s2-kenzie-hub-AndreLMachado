@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useHistory } from "react-router-dom";
 import "./style.css";
+import { toast } from "react-toastify";
 
 const formSchema = yup.object().shape({
   name: yup
@@ -48,14 +49,13 @@ const Form = ({ usuario, setUsuario }) => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
-        if (response.status === "error") {
-          //
-        }
-
-        history.push(`/`);
+        console.log(response.status);
+        if (response.status !== "error") {
+          toast.success("Cadastro criado com sucesso");
+          history.push(`/`);
+        } else toast.error("houve algum erro");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
   };
 
   const {

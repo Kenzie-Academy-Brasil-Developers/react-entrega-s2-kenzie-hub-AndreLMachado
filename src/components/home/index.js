@@ -103,9 +103,10 @@ const Home = () => {
       </div>
       <p>Tecnologias:</p>
       {(user.techs || []).map((tech) => (
-        <p>
-          {tech.title} - {tech.status}
-        </p>
+        <div className="cardTech" key={tech.id}>
+          <p>{tech.title}</p>
+          <p className="nivel">{tech.status}</p>
+        </div>
       ))}
     </div>
   );

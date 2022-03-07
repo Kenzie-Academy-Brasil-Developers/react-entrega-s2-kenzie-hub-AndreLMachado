@@ -27,7 +27,7 @@
 }
 
 .select-home {
-  width: 268px;
+  width: 264px;
 }
 
 .salvarCard {
@@ -36,4 +36,14 @@
   background-color: #212529;
   color: #fff;
   border: none;
+}
+
+.cardTech {
+  display: flex;
+  justify-content: space-between;
+  width: 264px;
+}
+
+.nivel {
+  color: #868e96;
 }
