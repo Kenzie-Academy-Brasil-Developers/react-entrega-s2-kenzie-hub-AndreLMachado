@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./components/formCadastro";
 import { Switch, Route } from "react-router-dom";
@@ -9,6 +9,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [usuario, setUsuario] = useState({});
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      return setIsLogin(true);
+    }
+  }, [isLogin]);
 
   return (
     <div className="App">
@@ -16,13 +24,17 @@ function App() {
       <header className="App-header">
         <Switch>
           <Route exact path="/">
-            <Login usuario={usuario} setUsuario={setUsuario} />
+            <Login
+              usuario={usuario}
+              setUsuario={setUsuario}
+              setIsLogin={setIsLogin}
+            />
           </Route>
           <Route exact path="/cadastro">
             <Form usuario={usuario} setUsuario={setUsuario} />
           </Route>
           <Route exact path="/home">
-            <Home />
+            <Home isLogin={isLogin} setIsLogin={setIsLogin} />
           </Route>
         </Switch>
       </header>

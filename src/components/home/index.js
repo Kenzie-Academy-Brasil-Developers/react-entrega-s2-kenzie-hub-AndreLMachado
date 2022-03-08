@@ -3,17 +3,18 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import "./style.css";
+import { Redirect } from "react-router-dom";
+import axios from "axios";
 
-const Home = () => {
+const Home = ({ isLogin, setIsLogin }) => {
   const history = useHistory();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || {}
+  );
+  const [techs, setTechs] = useState([]);
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      history.push("/");
-    }
-
-    setUser(JSON.parse(localStorage.getItem("user")));
+    loadTechs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -21,6 +22,13 @@ const Home = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     history.push("/");
+  };
+
+  const loadTechs = () => {
+    axios
+      .get(`https://kenziehub.herokuapp.com/users/${user.id}`)
+      .then((response) => setTechs(response.data.techs))
+      .catch((error) => console.log(error));
   };
 
   const saveTech = () => {
@@ -39,7 +47,6 @@ const Home = () => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         if (response.status === "error") {
           //
         }
@@ -48,8 +55,20 @@ const Home = () => {
         setUser(updatedUser);
 
         localStorage.setItem("user", JSON.stringify(updatedUser));
+        loadTechs();
       })
       .catch((err) => console.log(err));
+  };
+
+  const removeTech = (idTech) => {
+    axios
+      .delete(`https://kenziehub.herokuapp.com/users/techs/${idTech}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then(() => loadTechs())
+      .catch((error) => console.log(error));
   };
 
   const onSubmitFunction = (data) => {
@@ -60,7 +79,10 @@ const Home = () => {
     resolver: yupResolver({}),
   });
 
-  console.log(user);
+  if (!isLogin) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <div>
       <header className="headerHome">
@@ -99,12 +121,14 @@ const Home = () => {
         </form>
       </div>
       <p>Tecnologias:</p>
-      {(user.techs || []).map((tech) => (
+      {(techs || []).map((tech) => (
         <div className="cardTech" key={tech.id}>
           <p>{tech.title}</p>
           <p className="nivel">{tech.status}</p>
+          <button onClick={() => removeTech(tech.id)}>x</button>
         </div>
       ))}
+      {console.log(techs)}
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 
-const Login = ({ usuario, setUsuario }) => {
+const Login = ({ usuario, setUsuario, setIsLogin }) => {
   const history = useHistory();
   const [error, setError] = useState(null);
 
@@ -20,7 +20,6 @@ const Login = ({ usuario, setUsuario }) => {
   };
 
   const onLogin = () => {
-    console.log(usuario);
     setError(null);
     fetch("https://kenziehub.herokuapp.com/sessions", {
       method: "POST",
@@ -41,6 +40,7 @@ const Login = ({ usuario, setUsuario }) => {
         } else {
           localStorage.setItem("user", JSON.stringify(response.user));
           localStorage.setItem("token", response.token);
+          setIsLogin(true);
           history.push(`/home`);
         }
       })
